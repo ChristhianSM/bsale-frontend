@@ -90,10 +90,22 @@ section{
   color:var(--orange);
 }
 
-.header .navbar a{
+.header .navbar{
+  display: flex;
+  gap: 1.5rem;
   font-size: 1.7rem;
   margin:0 1rem;
   color:var(--black);
+}
+.header .navbar div{
+  padding: 7px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.header .navbar div:hover{
+  border: 1px solid;
+  color: white;
+  background-color: var(--orange);
 }
 
 .header .navbar a:hover{
@@ -301,8 +313,8 @@ section{
 }
 
 .products .container-products {
-  display: flex;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   align-items: center;
   gap: 1rem;
 }
@@ -320,6 +332,8 @@ section{
   outline: var(--outline);
   box-shadow: var(--box-shadow);
   transition: .2s linear;
+  height: 420px;
+  width: 300px;
 }
 
 .products .product-wrapper .box:hover{
@@ -332,6 +346,7 @@ section{
 }
 
 .products .product-wrapper .box h3{
+  height: 80px;
   font-size: 2.5rem;
   color:var(--black);
 }
