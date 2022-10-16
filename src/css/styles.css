@@ -272,3 +272,25 @@ section{
   color:var(--orange);
   text-decoration: underline;
 }
+
+/* Home */
+.home{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background: url(../assets/banner-bg.jpg) no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding-top: 17rem;
+  padding-bottom: 10rem;
+  color: white;
+}
+
+.home .content{
+  text-align: center;
+  width:30rem;
+}
+
+.home .content h3{
+  font-size: 3rem;
+}
