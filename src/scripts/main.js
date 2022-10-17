@@ -1,4 +1,6 @@
-import { getAllCategories, getAllProducts, getProductsByCategory, getProductsByQuery, totalShoppingCart } from "../helpers/helpers.js";
+import { totalShoppingCart } from "../helpers/helpers.js";
+import { getAllCategories } from "../services/categories.js";
+import { getAllProducts, getProductsByCategory, getProductsByQuery } from "../services/products.js";
 
 // Variables
 const searchForm = document.querySelector('.search-form');
@@ -18,15 +20,11 @@ let cart = [];
 btnSearch.addEventListener("click", () =>{
     searchForm.classList.toggle('active');
     shoppingCart.classList.remove('active');
-    // loginForm.classList.remove('active');
-    // navbar.classList.remove('active');
 })
 
 btnCart.addEventListener("click", () =>{
   shoppingCart.classList.toggle('active');
   searchForm.classList.remove('active');
-  // loginForm.classList.remove('active');
-  // navbar.classList.remove('active');
 })
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -99,6 +97,10 @@ function showProductsInHtml(products){
     const box = document.createElement("div");
     box.classList.add("box");
 
+    const discount = document.createElement("div");
+    discount.classList.add("discount");
+    discount.textContent = `${product.discount}%`
+
     const image = document.createElement("img");
     image.src = product.url_image;
 
@@ -123,6 +125,9 @@ function showProductsInHtml(products){
     }
     btnAddProduct.textContent = "add to cart"
 
+    if (!(product.discount === 0)) {
+      box.appendChild(discount);
+    }
     box.appendChild(image);
     box.appendChild(title);
     box.appendChild(stars);

@@ -341,6 +341,17 @@ section{
   transition: .2s linear;
   height: 420px;
   width: 300px;
+  position: relative;
+}
+
+.products .product-wrapper .box .discount {
+  background-color: var(--orange);
+  position: absolute;
+  padding: 10px;
+  font-size: 2rem;
+  right: 8px;
+  top: 8px;
+  color: white;
 }
 
 .products .product-wrapper .box:hover{
