@@ -1,4 +1,4 @@
-import { getAllCategories, getAllProducts, totalShoppingCart } from "../helpers/helpers.js";
+import { getAllCategories, getAllProducts, getProductsByCategory, totalShoppingCart } from "../helpers/helpers.js";
 
 // Variables
 const searchForm = document.querySelector('.search-form');
@@ -30,8 +30,9 @@ btnCart.addEventListener("click", () =>{
 
 document.addEventListener("DOMContentLoaded", async () => {
   showShoppingCart();
-  getCategories();
+  await getCategories();
   getProducts();
+  listenCategories();
 })
 
 // Funciones
@@ -79,6 +80,7 @@ async function getCategories() {
   const categories = await getAllCategories();
   categories.forEach( category => {
     const divCategory = document.createElement("div");
+    divCategory.classList.add("btn-category");
     divCategory.dataset.category = category.id
     divCategory.textContent = category.name;
 
@@ -87,6 +89,10 @@ async function getCategories() {
 }
 async function getProducts() {
   products = await getAllProducts();
+  showProductsInHtml(products);
+}
+function showProductsInHtml(products){
+  containerProducts.innerHTML = "";
   products.forEach( product => {
     const box = document.createElement("div");
     box.classList.add("box");
@@ -122,6 +128,18 @@ async function getProducts() {
     box.appendChild(btnAddProduct);
 
     containerProducts.appendChild(box)
+  })
+}
+function listenCategories() {
+  const btnsCategory = document.querySelectorAll(".btn-category")
+  btnsCategory.forEach( btnCategory => {
+    btnCategory.addEventListener("click", async () => {
+      const idCategory = btnCategory.dataset.category;
+      const data = await getProductsByCategory(idCategory);
+      products = data;
+      // console.log(data);
+      showProductsInHtml(products);
+    })
   })
 }
 function addProductToCart(idProduct){
