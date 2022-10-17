@@ -13,3 +13,7 @@ export const getAllProducts = async () => {
   if (!(status === 200)) console.log(message);
   return data.products
 }
+
+export const totalShoppingCart = (cart) => {
+  return cart.reduce( (accumulator, current) => accumulator + current.price * current.quantity, 0);
+}
