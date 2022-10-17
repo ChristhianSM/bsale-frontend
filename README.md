@@ -19,7 +19,7 @@ Tienda virtual, donde podras encontrar diferentes productos tales como: Bebidas 
   <img src="https://github.com/ChristhianSM/bsale-frontend/blob/main/src/assets/imagen1.PNG" width="400" title="hover text">
   <img src="https://github.com/ChristhianSM/bsale-frontend/blob/main/src/assets/imagen2.PNG" width="400" title="hover text">
   <img src="https://github.com/ChristhianSM/bsale-frontend/blob/main/src/assets/imagen3.PNG" width="400" title="hover text">
-</div
+</div>
 
 ### LICENCIA
 
