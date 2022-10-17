@@ -102,6 +102,13 @@ section{
   border: 1px solid transparent;
   cursor: pointer;
 }
+
+.header .navbar div.active {
+  border: 1px solid;
+  color: white;
+  background-color: var(--orange);
+}
+
 .header .navbar div:hover{
   border: 1px solid;
   color: white;

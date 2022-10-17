@@ -1,8 +1,9 @@
-import { getAllCategories, getAllProducts, getProductsByCategory, totalShoppingCart } from "../helpers/helpers.js";
+import { getAllCategories, getAllProducts, getProductsByCategory, getProductsByQuery, totalShoppingCart } from "../helpers/helpers.js";
 
 // Variables
 const searchForm = document.querySelector('.search-form');
 const btnSearch = document.querySelector('#search-btn');
+const inputSearch = document.querySelector('#search-box');
 const shoppingCart = document.querySelector('.shopping-cart');
 const btnCart = document.querySelector('#cart-btn');
 const navbar = document.querySelector('.navbar');
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await getCategories();
   getProducts();
   listenCategories();
+  listenSearch();
 })
 
 // Funciones
@@ -137,9 +139,22 @@ function listenCategories() {
       const idCategory = btnCategory.dataset.category;
       const data = await getProductsByCategory(idCategory);
       products = data;
-      // console.log(data);
       showProductsInHtml(products);
     })
+  })
+}
+function listenSearch() {
+  searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+  })
+  inputSearch.addEventListener("input", async () => {
+    if (inputSearch.value === "") {
+      products = await getAllProducts();
+    }else{
+      const data = await getProductsByQuery(inputSearch.value);
+      products = data;
+    }
+    showProductsInHtml(products)
   })
 }
 function addProductToCart(idProduct){
