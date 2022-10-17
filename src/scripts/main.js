@@ -67,7 +67,7 @@ function showShoppingCart(cart = []) {
       title.textContent = product.name;
   
       const price = document.createElement("span");
-      price.textContent = `Price: ${product.price} - `;
+      price.textContent = `Price: ${product.price - product.price * product.discount / 100} - `;
   
       const quantity = document.createElement("span");
       quantity.textContent = `Quantity: ${product.quantity}`;
@@ -128,10 +128,12 @@ function showProductsInHtml(products){
     containerPrice.classList.add("container-price")
     const price = document.createElement("p");
     price.classList.add("price")
-    price.textContent = `$ ${product.price}`;
+    if (!(product.discount === 0)) {
+      price.textContent = `$ ${product.price}`;
+    }
     const priceWithDiscount = document.createElement("p");
     priceWithDiscount.classList.add("price-discount");
-    priceWithDiscount.textContent = `$ ${product.price  - product.price * 0.20}`
+    priceWithDiscount.textContent = `$ ${product.price  - product.price * product.discount / 100}`
 
     const btnAddProduct = document.createElement("a");
     btnAddProduct.classList.add("btn")
