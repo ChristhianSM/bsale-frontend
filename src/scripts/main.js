@@ -38,42 +38,51 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Funciones
 function showShoppingCart(cart = []) {
   containerShoppingCart.innerHTML = "";
-  cart.forEach( product => {
-    const box = document.createElement("div");
-    box.classList.add("box");
-
-    const btnDelete = document.createElement("i");
-    btnDelete.className = "fas fa-trash";
-
-    btnDelete.onclick = () => {
-      deleteProduct(product.id);
-    }
-
-    const image = document.createElement("img");
-    image.src = product.url_image;
-
-    const content = document.createElement("div");
-    content.classList.add("content");
-
-    const title = document.createElement("h3");
-    title.textContent = product.name;
-
-    const price = document.createElement("span");
-    price.textContent = `Price: ${product.price} - `;
-
-    const quantity = document.createElement("span");
-    quantity.textContent = `Quantity: ${product.quantity}`;
-
-    content.appendChild(title);
-    content.appendChild(price);
-    content.appendChild(quantity);
-
-    box.appendChild(btnDelete);
-    box.appendChild(image);
-    box.appendChild(content);
-
-    containerShoppingCart.appendChild(box);
-  })
+  if (cart.length === 0) {
+    const cartEmpty = document.createElement("i");
+    cartEmpty.className = "fas fa-shopping-cart";
+    const content = document.createElement("p");
+    content.textContent = "Shopping Cart Empty"
+    containerShoppingCart.appendChild(cartEmpty)
+    containerShoppingCart.appendChild(content)
+  }else{
+    cart.forEach( product => {
+      const box = document.createElement("div");
+      box.classList.add("box");
+  
+      const btnDelete = document.createElement("i");
+      btnDelete.className = "fas fa-trash";
+  
+      btnDelete.onclick = () => {
+        deleteProduct(product.id);
+      }
+  
+      const image = document.createElement("img");
+      image.src = product.url_image;
+  
+      const content = document.createElement("div");
+      content.classList.add("content");
+  
+      const title = document.createElement("h3");
+      title.textContent = product.name;
+  
+      const price = document.createElement("span");
+      price.textContent = `Price: ${product.price} - `;
+  
+      const quantity = document.createElement("span");
+      quantity.textContent = `Quantity: ${product.quantity}`;
+  
+      content.appendChild(title);
+      content.appendChild(price);
+      content.appendChild(quantity);
+  
+      box.appendChild(btnDelete);
+      box.appendChild(image);
+      box.appendChild(content);
+  
+      containerShoppingCart.appendChild(box);
+    })
+  }
   totalCart.textContent = `Total: $ ${totalShoppingCart(cart)}`
 }
 async function getCategories() {
@@ -115,8 +124,14 @@ function showProductsInHtml(products){
       <i class="fas fa-star"></i>
       <i class="fas fa-star-half-alt"></i>
     `
-    const price = document.createElement("div");
-    price.textContent = product.price;
+    const containerPrice = document.createElement("div");
+    containerPrice.classList.add("container-price")
+    const price = document.createElement("p");
+    price.classList.add("price")
+    price.textContent = `$ ${product.price}`;
+    const priceWithDiscount = document.createElement("p");
+    priceWithDiscount.classList.add("price-discount");
+    priceWithDiscount.textContent = `$ ${product.price  - product.price * 0.20}`
 
     const btnAddProduct = document.createElement("a");
     btnAddProduct.classList.add("btn")
@@ -128,10 +143,13 @@ function showProductsInHtml(products){
     if (!(product.discount === 0)) {
       box.appendChild(discount);
     }
+
+    containerPrice.appendChild(price);
+    containerPrice.appendChild(priceWithDiscount);
     box.appendChild(image);
     box.appendChild(title);
     box.appendChild(stars);
-    box.appendChild(price);
+    box.appendChild(containerPrice);
     box.appendChild(btnAddProduct);
 
     containerProducts.appendChild(box)

@@ -137,6 +137,17 @@ section{
   color:#fff;
 }
 
+.header .icons .cart-btn {
+  position: relative;
+}
+
+.header .icons .cart-btn p {
+  position: absolute;
+  padding: 5px;
+  background-color: white;
+  color: black;
+}
+
 #menu-btn{
   display: none;
 }
@@ -188,6 +199,7 @@ section{
   box-shadow: var(--box-shadow);
   width:35rem;
   background: #fff;
+  text-align: center;
 }
 
 .header .shopping-cart.active{
@@ -202,6 +214,11 @@ section{
   position: relative;
   margin:1rem 0;
 }
+.header .shopping-cart .fa-shopping-cart{
+  margin-top: 1rem;
+  font-size: 7rem;
+}
+
 
 .header .shopping-cart .box img{
   height:10rem;
@@ -339,7 +356,7 @@ section{
   outline: var(--outline);
   box-shadow: var(--box-shadow);
   transition: .2s linear;
-  height: 420px;
+  height: 440px;
   width: 300px;
   position: relative;
 }
@@ -373,6 +390,23 @@ section{
   font-size: 2rem;
   color:var(--light-color);
   padding:.5rem 0;
+}
+
+.products .product-wrapper .box .container-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.products .product-wrapper .box .container-price .price {
+  font-size: 1.5rem;
+  text-decoration: line-through;
+}
+
+.products .product-wrapper .box .container-price .price-discount {
+  font-size: 2.2rem;
+  font-weight: 900;
 }
 
 .products .product-wrapper .box .stars i{
