@@ -13,6 +13,14 @@ Tienda virtual, donde podras encontrar diferentes productos tales como: Bebidas 
 
 * Vanilla Js
 
+## Demo: 
+
+<div align="center" style="margin-bottom:30px">
+  <img src="https://github.com/ChristhianSM/bsale-frontend/blob/main/src/assets/imagen1.PNG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/bsale-frontend/blob/main/src/assets/imagen2.PNG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/bsale-frontend/blob/main/src/assets/imagen3.PNG" width="400" title="hover text">
+</div
+
 ### LICENCIA
 
 Licencia MIT Copyright (c) 2022, Christhian Silupú Moscol.
