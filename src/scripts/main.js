@@ -10,16 +10,18 @@ const shoppingCart = document.querySelector('.shopping-cart');
 const btnCart = document.querySelector('#cart-btn');
 const navbar = document.querySelector('.navbar');
 const containerProducts = document.querySelector('.container-products');
+const containerEmpty= document.querySelector('.container-empty');
 const containerShoppingCart = document.querySelector('.container-products-cart');
 const totalCart = document.querySelector('.total');
+const toast = document.getElementById('toasts');
 
 let products = [];
 let cart = [];
 
 // Eventos
 btnSearch.addEventListener("click", () =>{
-    searchForm.classList.toggle('active');
-    shoppingCart.classList.remove('active');
+  searchForm.classList.toggle('active');
+  shoppingCart.classList.remove('active');
 })
 
 btnCart.addEventListener("click", () =>{
@@ -85,6 +87,7 @@ function showShoppingCart(cart = []) {
   }
   totalCart.textContent = `Total: $ ${totalShoppingCart(cart)}`
 }
+
 async function getCategories() {
   const categories = await getAllCategories();
   categories.forEach( category => {
@@ -96,67 +99,76 @@ async function getCategories() {
     navbar.appendChild(divCategory)
   })
 }
+
 async function getProducts() {
   products = await getAllProducts();
   showProductsInHtml(products);
 }
+
 function showProductsInHtml(products){
   containerProducts.innerHTML = "";
-  products.forEach( product => {
-    const box = document.createElement("div");
-    box.classList.add("box");
-
-    const discount = document.createElement("div");
-    discount.classList.add("discount");
-    discount.textContent = `${product.discount}%`
-
-    const image = document.createElement("img");
-    image.src = product.url_image;
-
-    const title = document.createElement("h3");
-    title.textContent = product.name;
-
-    const stars = document.createElement("div");
-    stars.innerHTML = `
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star-half-alt"></i>
-    `
-    const containerPrice = document.createElement("div");
-    containerPrice.classList.add("container-price")
-    const price = document.createElement("p");
-    price.classList.add("price")
-    if (!(product.discount === 0)) {
-      price.textContent = `$ ${product.price}`;
-    }
-    const priceWithDiscount = document.createElement("p");
-    priceWithDiscount.classList.add("price-discount");
-    priceWithDiscount.textContent = `$ ${product.price  - product.price * product.discount / 100}`
-
-    const btnAddProduct = document.createElement("a");
-    btnAddProduct.classList.add("btn")
-    btnAddProduct.onclick = () => {
-      addProductToCart(product.id);
-    }
-    btnAddProduct.textContent = "add to cart"
-
-    if (!(product.discount === 0)) {
-      box.appendChild(discount);
-    }
-
-    containerPrice.appendChild(price);
-    containerPrice.appendChild(priceWithDiscount);
-    box.appendChild(image);
-    box.appendChild(title);
-    box.appendChild(stars);
-    box.appendChild(containerPrice);
-    box.appendChild(btnAddProduct);
-
-    containerProducts.appendChild(box)
-  })
+  if (products.length === 0) {
+    containerEmpty.textContent = "No hay productos con dicha busqueda, por favor intente con otro termino de busqueda"
+    document.querySelector(".product-wrapper").appendChild(containerEmpty);
+  }else {
+    containerEmpty.textContent = "";
+    products.forEach( product => {
+      const box = document.createElement("div");
+      box.classList.add("box");
+  
+      const discount = document.createElement("div");
+      discount.classList.add("discount");
+      discount.textContent = `${product.discount}%`
+  
+      const image = document.createElement("img");
+      image.src = product.url_image ? product.url_image :"../assets/no-disponible.png"; 
+  
+      const title = document.createElement("h3");
+      title.textContent = product.name;
+  
+      const stars = document.createElement("div");
+      stars.innerHTML = `
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+      `
+      const containerPrice = document.createElement("div");
+      containerPrice.classList.add("container-price")
+      const price = document.createElement("p");
+      price.classList.add("price")
+      if (!(product.discount === 0)) {
+        price.textContent = `$ ${product.price}`;
+      }
+      const priceWithDiscount = document.createElement("p");
+      priceWithDiscount.classList.add("price-discount");
+      priceWithDiscount.textContent = `$ ${product.price  - product.price * product.discount / 100}`
+  
+      const btnAddProduct = document.createElement("a");
+      btnAddProduct.classList.add("btn")
+      btnAddProduct.onclick = () => {
+        addProductToCart(product.id);
+      }
+      btnAddProduct.textContent = "add to cart"
+  
+      if (!(product.discount === 0)) {
+        box.appendChild(discount);
+      }
+  
+      containerPrice.appendChild(price);
+      containerPrice.appendChild(priceWithDiscount);
+      box.appendChild(image);
+      box.appendChild(title);
+      box.appendChild(stars);
+      box.appendChild(containerPrice);
+      box.appendChild(btnAddProduct);
+  
+      containerProducts.appendChild(box)
+    })
+  }
 }
+
 function listenCategories() {
   const btnsCategory = document.querySelectorAll(".btn-category")
   btnsCategory.forEach( btnCategory => {
@@ -168,6 +180,7 @@ function listenCategories() {
     })
   })
 }
+
 function listenSearch() {
   searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -182,6 +195,7 @@ function listenSearch() {
     showProductsInHtml(products)
   })
 }
+
 function addProductToCart(idProduct){
   let findProduct = products.find( product => product.id === idProduct);
 
@@ -190,16 +204,30 @@ function addProductToCart(idProduct){
   if (!productExist) {
     findProduct.quantity = 1;
     cart.push(findProduct);
+    showToast("Producto agregado correctamente", "success");
   }else {
     cart = cart.map( product => {
       if (product.id === idProduct) product.quantity += 1;
       return product
     })
+    showToast("Producto actualizado correctamente", "success");
   }
   
   showShoppingCart(cart);
 }
+
 function deleteProduct(idProduct){
+  showToast("Producto eliminado correctamente", "warning");
   cart = cart.filter( product => product.id !== idProduct);
   showShoppingCart(cart);
 }
+
+function showToast (messaje, type){
+  toast.textContent = messaje;
+  toast.classList.add(type);
+  setTimeout(() => {
+    toast.textContent = "";
+    toast.classList.remove(type);
+  }, 2000);
+}
+
