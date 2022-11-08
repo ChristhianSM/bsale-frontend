@@ -455,12 +455,21 @@ section{
 
 /* Media queries: Modelo responsive*/ 
 @media (max-width: 768px) {
+  .home {
+    display: none;
+  }
+  .products {
+    margin-top: 20rem;
+  }
   .header .search-form {
     width: 70%;
   }
 }
 
 @media (max-width: 425px) {
+  .header .shopping-cart {
+    width: 90%
+  }
   .header .search-form {
     width: 90%;
   }

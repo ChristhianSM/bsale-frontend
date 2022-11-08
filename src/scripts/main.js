@@ -32,8 +32,11 @@ btnCart.addEventListener("click", () =>{
   searchForm.classList.remove('active');
 })
 
+// Evento para cerrar el filtro y retornar todos los productos.
 closeFilter.addEventListener("click", () => {
   filter.classList.add("none");
+  searchForm.classList.remove('active');
+  inputSearch.value = "";
   getProducts();
 })
 
@@ -114,7 +117,6 @@ async function getCategories() {
 
 // Obtener todos los productos de la bd y mostrarlos en el html.
 async function getProducts() {
-  console.log("entrooo")
   products = await getAllProducts();
   showProductsInHtml(products);
 }
@@ -210,7 +212,7 @@ function listenSearch() {
 
     if (inputSearch.value === "") {
       // Si no hay termino de busqueda, ocultamos el texto
-      filterText.classList.add("none");
+      filter.classList.add("none");
       products = await getAllProducts();
     }else{
       // Mostramos el texto del termino de busqueda a filtrar
