@@ -13,7 +13,9 @@ const containerProducts = document.querySelector('.container-products');
 const containerEmpty= document.querySelector('.container-empty');
 const containerShoppingCart = document.querySelector('.container-products-cart');
 const totalCart = document.querySelector('.total');
-const filterText = document.querySelector('.filter');
+const filter = document.querySelector('.filter');
+const filterText = document.querySelector('.filter-text');
+const closeFilter = document.querySelector('.close');
 const toast = document.getElementById('toasts');
 
 let products = [];
@@ -28,6 +30,11 @@ btnSearch.addEventListener("click", () =>{
 btnCart.addEventListener("click", () =>{
   shoppingCart.classList.toggle('active');
   searchForm.classList.remove('active');
+})
+
+closeFilter.addEventListener("click", () => {
+  filter.classList.add("none");
+  getProducts();
 })
 
 // Evento para realizar cargas iniciales como obtener las categorias, los productos y escuchar eventos al iniciar la pagina web
@@ -107,6 +114,7 @@ async function getCategories() {
 
 // Obtener todos los productos de la bd y mostrarlos en el html.
 async function getProducts() {
+  console.log("entrooo")
   products = await getAllProducts();
   showProductsInHtml(products);
 }
@@ -115,7 +123,7 @@ async function getProducts() {
 function showProductsInHtml(products){
   containerProducts.innerHTML = "";
   if (products.length === 0) {
-    containerEmpty.textContent = "No hay productos con dicha busqueda, por favor intente con otro termino de busqueda"
+    containerEmpty.textContent = "There are no products with this search, please try another search term"
     document.querySelector(".product-wrapper").appendChild(containerEmpty);
   }else {
     containerEmpty.textContent = "";
@@ -187,7 +195,7 @@ function listenCategories() {
       showProductsInHtml(products);
 
       // Mostramos el texto del filtro que seleccionamos
-      filterText.classList.remove("none");
+      filter.classList.remove("none");
       filterText.textContent = btnCategory.textContent;
     })
   })
@@ -206,7 +214,7 @@ function listenSearch() {
       products = await getAllProducts();
     }else{
       // Mostramos el texto del termino de busqueda a filtrar
-      filterText.classList.remove("none");
+      filter.classList.remove("none");
       filterText.textContent = inputSearch.value;
 
       const data = await getProductsByQuery(inputSearch.value);
@@ -225,13 +233,13 @@ function addProductToCart(idProduct){
   if (!productExist) {
     findProduct.quantity = 1;
     cart.push(findProduct);
-    showToast("Producto agregado correctamente", "success");
+    showToast("Product added correctly", "success");
   }else {
     cart = cart.map( product => {
       if (product.id === idProduct) product.quantity += 1;
       return product
     })
-    showToast("Producto actualizado correctamente", "success");
+    showToast("Product Updated correctly", "success");
   }
   
   showShoppingCart(cart);
@@ -239,7 +247,7 @@ function addProductToCart(idProduct){
 
 // Funcion para eliminar un producto de mi carrito de compras, lanzando notificiacion de eliminacion.
 function deleteProduct(idProduct){
-  showToast("Producto eliminado correctamente", "warning");
+  showToast("Product deleted correctly", "warning");
   cart = cart.filter( product => product.id !== idProduct);
   showShoppingCart(cart);
 }
