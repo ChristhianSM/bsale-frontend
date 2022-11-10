@@ -3,6 +3,9 @@
 Tienda virtual, donde podras encontrar diferentes productos tales como: Bebidas Energeticas, Piscos, Rones, Snacks, Cervezas y más.
 Aplicacion adaptada a los diferentes dispositivos mobiles tales como celulares, tablets y computadoras de escritorio.
 
+## Explicacion del proyecto 
+Se planteo contruir una tienda online basada en productos que se encuentran alojados en una base de datos Mysql, para ello se desarrollo una REST API que se conecta a esta base de datos y un front para poder consumir dichos recursos mediante fetch, este proyecto tiene la funcionalidad de mostrar al usuario todos los productos traidos de la base de datos, tambien se podra visualizar las categorias de la tienda, asi como realizar filtros trayendo los productos que pertenecen a dicha categoria. El usuario podra buscar productos por medio de un termino de busqueda, podra agregar productos a su carrito de compras.
+
 ## Que puedo hacer en BSale Licoreria :
 
 * Visualizar todos los productos que la tienda ofrece
