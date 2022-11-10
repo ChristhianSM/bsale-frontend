@@ -132,6 +132,20 @@ section{
   margin-left: .3rem;
   cursor: pointer;
   text-align: center;
+  position: relative;
+}
+
+.icons .shopping-cart-quantity {
+  top: -10px;
+  background: orange;
+  position: absolute;
+  color: black;
+  padding: 7px;
+  font-size: 12px;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  line-height: 1;
 }
 
 .header .icons div:hover{
@@ -406,6 +420,8 @@ section{
 }
 
 .products .product-wrapper .box img{
+  object-fit: contain;
+  object-position: center;
   height:20rem;
   width: 100%;
 }
@@ -459,7 +475,7 @@ section{
     display: none;
   }
   .products {
-    margin-top: 20rem;
+    margin-top: 22rem;
   }
   .header .search-form {
     width: 70%;
@@ -474,5 +490,6 @@ section{
     width: 90%;
   }
 }
+
 
 

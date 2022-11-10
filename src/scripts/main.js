@@ -7,6 +7,7 @@ const searchForm = document.querySelector('.search-form');
 const btnSearch = document.querySelector('#search-btn');
 const inputSearch = document.querySelector('#search-box');
 const shoppingCart = document.querySelector('.shopping-cart');
+const shoppingCartQuantity = document.querySelector('.shopping-cart-quantity');
 const btnCart = document.querySelector('#cart-btn');
 const navbar = document.querySelector('.navbar');
 const containerProducts = document.querySelector('.container-products');
@@ -24,6 +25,7 @@ let cart = [];
 // Eventos
 btnSearch.addEventListener("click", () =>{
   searchForm.classList.toggle('active');
+  inputSearch.focus();
   shoppingCart.classList.remove('active');
 })
 
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // Funciones
 function showShoppingCart(cart = []) {
+  shoppingCartQuantity.textContent = cart.length;
   containerShoppingCart.innerHTML = "";
 
   // Verificamos si el carrito de compras esta vacio, en caso de estar vacio, mostrar el mensaje "Shopping Cart Empty", si el carrito esta con productos, entonces renderizar dichos productos.
@@ -74,7 +77,7 @@ function showShoppingCart(cart = []) {
       }
   
       const image = document.createElement("img");
-      image.src = product.url_image;
+      image.src = product.url_image ? product.url_image :"https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930";
   
       const content = document.createElement("div");
       content.classList.add("content");
@@ -138,7 +141,7 @@ function showProductsInHtml(products){
       discount.textContent = `${product.discount}%`
   
       const image = document.createElement("img");
-      image.src = product.url_image ? product.url_image :"../assets/no-disponible.png"; 
+      image.src = product.url_image ? product.url_image :"https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"; 
   
       const title = document.createElement("h3");
       title.textContent = product.name;

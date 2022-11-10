@@ -1,7 +1,7 @@
 # BSale Licoreria
 
 Tienda virtual, donde podras encontrar diferentes productos tales como: Bebidas Energeticas, Piscos, Rones, Snacks, Cervezas y más.
-Aplicacion adatpadata a los diferentes dispositivos mobiles.
+Aplicacion adaptada a los diferentes dispositivos mobiles tales como celulares, tablets y computadoras de escritorio.
 
 ## Que puedo hacer en BSale Licoreria :
 
@@ -19,6 +19,7 @@ Aplicacion adatpadata a los diferentes dispositivos mobiles.
 ## Temas comprendidos
 
 * Vanilla Js
+* Consumo de apis (fetch)
 
 ## Demo: 
 
@@ -35,7 +36,7 @@ Aplicacion adatpadata a los diferentes dispositivos mobiles.
    ```sh
    git clone https://github.com/ChristhianSM/bsale-frontend.git
    ```
-2. Inicie un servidor local con Live Server en la carpeta del proyecto. Puede cambiar la variable BASE_URI en el archivo config.js.
+2. Ingrese a la carpeta del proyecto, luego a la carpeta src, abra el archivo index.html e inicie un servidor local con Live Server. Puede cambiar la variable BASE_URI en el archivo config.js.
    ```js
    const BASE_URI = 'https://api-bsaletest.herokuapp.com/';
    ```
